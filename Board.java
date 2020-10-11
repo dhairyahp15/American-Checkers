@@ -49,8 +49,8 @@ public class Board {
         else  
           StdDraw.setPenColor(StdDraw.WHITE);
         // updating center for every checks so that it draws a column of checks for every row.
-        double xC = (2 * i + 1)/(2.0 * BOARD_SIZE);
-        double yC = (2 * j + 1)/(2.0 * BOARD_SIZE);   
+        double xC = (2 * j + 1)/(2.0 * BOARD_SIZE);
+        double yC = (2 * i + 1)/(2.0 * BOARD_SIZE);   
         //drawing filled rectangle with the corresponding color of the pen.
         StdDraw.filledRectangle(xC, yC, TILE_RADIUS, TILE_RADIUS);
       }    
@@ -96,7 +96,7 @@ public class Board {
   {
     for(int i = 0; i < BOARD_SIZE; i++)
     {
-      for(itn j = 0; j < BOARD_SIZE; j++)
+      for(int j = 0; j < BOARD_SIZE; j++)
       {
         boardState[i][j] = empty;
       }
@@ -115,7 +115,7 @@ public class Board {
 
     for(int i = 0; i < BOARD_SIZE; i++)
     {
-      for(int j = BOARD_SIZE; j >= BOARD_SIZE - 3; j--)
+      for(int j = BOARD_SIZE - 1; j >= BOARD_SIZE - 3; j--)
       {
         if(isValidTile(i, j))
         {
@@ -123,6 +123,36 @@ public class Board {
         }
       }
     } // Sets the black tiles to the starting position.
+  }
+
+  public void drawTiles()
+  {
+    for(int i = 0; i < BOARD_SIZE; i++)
+    {
+      for(int j = 0; j < BOARD_SIZE; j++)
+      {
+        if(isValidTile(i, j))
+        {
+          drawTile(i, j, boardState[i][j]);
+        }
+      }
+    }
+  }
+
+  public void setTile(int row, int col, String value)
+  {
+          boardState[row][col] = value;
+  }
+
+  public void clearBoard()
+  {
+    for(int i = 0; i < BOARD_SIZE; i++)
+    {
+      for(int j = 0; j < BOARD_SIZE; j++)
+      {
+        boardState[i][j] = empty;
+      }
+    }
   }
 
   

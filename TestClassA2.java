@@ -18,6 +18,10 @@ public class TestClassA2{
     b.drawBoard();
     b.drawTile(0, 0, Board.red);
     b.drawTile(7, 7, Board.black);
+    b.resetBoard();
+    b.drawTiles();
+    b.setTile(3, 5, Board.black);
+    b.drawTiles();
   }
 /*
   // Should be the board set up with tiles 
