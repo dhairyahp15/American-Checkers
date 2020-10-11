@@ -14,13 +14,10 @@ public class TestClassA2{
   // Should be a board with one red and one black tile in the corners (see images. )
   public static void phase1(){
     Board b = new Board();
-    b.drawTile(0, 0, "red");
-    b.drawTile(7, 7, "black");
-
-    //b.drawBoard();
-    //b.drawTile(0,0,0);
-    //b.drawTile(7,7,1);
-
+    // testing out all the instance methods created.
+    b.drawBoard();
+    b.drawTile(0, 0, Board.red);
+    b.drawTile(7, 7, Board.black);
   }
 /*
   // Should be the board set up with tiles 

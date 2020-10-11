@@ -7,4 +7,6 @@ comment2.params=
 comment2.target=void\ drawBoard()
 comment3.params=row\ col\ color
 comment3.target=void\ drawTile(int,\ int,\ java.lang.String)
-numComments=4
+comment4.params=row\ col
+comment4.target=boolean\ isValidTile(int,\ int)
+numComments=5
