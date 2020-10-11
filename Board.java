@@ -91,6 +91,40 @@ public class Board {
     return isValid;
   }
 
+  // This method clears the tiles on the board and stores the starting positon of the board in the boardState.
+  public void resetBoard()
+  {
+    for(int i = 0; i < BOARD_SIZE; i++)
+    {
+      for(itn j = 0; j < BOARD_SIZE; j++)
+      {
+        boardState[i][j] = empty;
+      }
+    } // Clears the board.
+
+    for(int i = 0; i < BOARD_SIZE; i++)
+    {
+      for(int j = 0; j < 3; j++)
+      {
+        if(isValidTile(i, j))
+        {
+          boardState[i][j] = red;
+        }
+      }
+    } // Sets the red tiles to the starting positions.
+
+    for(int i = 0; i < BOARD_SIZE; i++)
+    {
+      for(int j = BOARD_SIZE; j >= BOARD_SIZE - 3; j--)
+      {
+        if(isValidTile(i, j))
+        {
+          boardState[i][j] = black;
+        }
+      }
+    } // Sets the black tiles to the starting position.
+  }
+
   
 
 }//Chessboard
