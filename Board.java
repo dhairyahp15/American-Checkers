@@ -175,5 +175,36 @@ public class Board {
     return count;
   }
 
+  public boolean isValidMove(int startRow, int startCol, int endRow, int endCol, String color)
+  {
+    boolean isValidMove = false;
+    if(color.equals(red))
+    {
+      if(boardState[endRow][endCol].equals(empty))
+      {  
+        if(endRow - startRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+          isValidMove = true;
+      }
+      else
+      {
+        if(endRow - startRow == 2 && (endCol - startCol == 2 || startCol - endCol == 2))
+          isValidMove = true;
+      }
+    }
 
+    if(color.equals(black))
+    {
+      if(boardState[endRow][endCol].equals(empty))
+      {  
+        if(startRow - endRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+          isValidMove = true;
+      }
+      else
+      {
+        if(startRow - endRow == 2 && (endCol - startCol == 2 || startCol - endCol == 2))
+          isValidMove = true;
+      }
+    }
+    return isValidMove;
+  }
 }//Chessboard
