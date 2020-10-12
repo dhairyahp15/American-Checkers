@@ -1,3 +1,4 @@
+
 /**
  * Checkers game base framework. 
  */
@@ -59,13 +60,12 @@ public class Board {
   // This method draws a Tile in the row & column passed as a parameter, with given color and same radius as TILE_RADIUS.
   public void drawTile(int row, int col, String color)
   {
+      // Scaling center of the tile using the given row and column.
+    double xC = (2 * col + 1)/(2.0 * BOARD_SIZE);
+    double yC = (2 * row + 1)/(2.0 * BOARD_SIZE);
     // This should work only if the given String color is red or black.
     if(color.equalsIgnoreCase(red) || color.equalsIgnoreCase(black))
     {
-      // Scaling center of the tile using the given row and column.
-      double xC = (2 * col + 1)/(2.0 * BOARD_SIZE);
-      double yC = (2 * row + 1)/(2.0 * BOARD_SIZE);
-
       // following conditional checks the given color and sets the pen color respectively.
       if(color.equalsIgnoreCase(black))
         StdDraw.setPenColor(StdDraw.BLACK);
@@ -74,7 +74,7 @@ public class Board {
       // Drawing filled ellipse with the respective pen color and center.
       StdDraw.filledEllipse(xC, yC, TILE_RADIUS, TILE_RADIUS);
     }
-    else
+    else if(color.equalsIgnoreCase(empty) && isValidTile(row, col))
     {
       StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
       StdDraw.filledEllipse(xC, yC, TILE_RADIUS, TILE_RADIUS);
@@ -178,33 +178,89 @@ public class Board {
   public boolean isValidMove(int startRow, int startCol, int endRow, int endCol, String color)
   {
     boolean isValidMove = false;
-    if(color.equals(red))
+    if(boardState[endRow][endCol].equals(empty))
     {
-      if(boardState[endRow][endCol].equals(empty))
-      {  
-        if(endRow - startRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
-          isValidMove = true;
-      }
-      else
+      if(color.equals(red))
       {
-        if(endRow - startRow == 2 && (endCol - startCol == 2 || startCol - endCol == 2))
-          isValidMove = true;
+          if(endRow - startRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+            isValidMove = true;
+          else if(endRow - startRow == 2 && (endCol - startCol == 2 || startCol - endCol == 2))
+          {
+             if(endCol > 0 && ((boardState[endRow - 1][endCol - 1].equals(black)) || (boardState[endRow - 1][endCol + 1].equals(black))))
+              isValidMove = true;
+            else if(boardState[endRow - 1][endCol + 1].equals(black))
+              isValidMove = true;
+          }
+          else
+            isValidMove = false;
       }
-    }
 
-    if(color.equals(black))
+      if(color.equals(black))
+      {
+          if(startRow - endRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+             isValidMove = true;
+          else if(startRow - endRow == 2 && (endCol - startCol == 2 || startCol - endCol == 2))
+          {
+            if(endCol > 0 && ((boardState[endRow + 1][endCol - 1].equals(red)) || (boardState[endRow + 1][endCol + 1].equals(red))))
+              isValidMove = true;
+            else if(boardState[endRow + 1][endCol + 1].equals(red))
+              isValidMove = true;
+
+          }
+          else
+             isValidMove = false;
+      }
+    }
+    else
+       isValidMove = false;
+    return isValidMove;
+  }
+
+  public void applyMove(int startRow, int startCol, int endRow, int endCol)
+  {
+    if(boardState[startRow][startCol].equals(red))
     {
-      if(boardState[endRow][endCol].equals(empty))
-      {  
-        if(startRow - endRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
-          isValidMove = true;
+      if(endRow - startRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+      {
+        boardState[endRow][endCol] = boardState[startRow][startCol];
+        boardState[startRow][startCol] = empty;
       }
       else
       {
-        if(startRow - endRow == 2 && (endCol - startCol == 2 || startCol - endCol == 2))
-          isValidMove = true;
+        boardState[endRow][endCol] = boardState[startRow][startCol];
+        boardState[startRow][startCol] = empty;
+        if(endCol > 0)
+        {
+          if(boardState[endRow - 1][endCol - 1].equals(black))
+            boardState[endRow - 1][endCol - 1] = empty;
+          else
+            boardState[endRow - 1][endCol + 1] = empty;
+        }
+        else if(boardState[endRow - 1][endCol + 1].equals(black))
+            boardState[endRow - 1][endCol + 1] = empty;
       }
     }
-    return isValidMove;
+    else
+    {
+        if(startRow - endRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+      {
+        boardState[endRow][endCol] = boardState[startRow][startCol];
+        boardState[startRow][startCol] = empty;
+      }
+      else
+      {
+        boardState[endRow][endCol] = boardState[startRow][startCol];
+        boardState[startRow][startCol] = empty;
+        if(endCol > 0)
+        {
+          if(boardState[endRow + 1][endCol - 1].equals(red))
+            boardState[endRow + 1][endCol - 1] = empty;
+          else
+            boardState[endRow + 1][endCol + 1] = empty;
+        }
+        else if(boardState[endRow + 1][endCol + 1].equals(red))
+            boardState[endRow + 1][endCol + 1] = empty;
+      }
+    }
   }
 }//Chessboard
