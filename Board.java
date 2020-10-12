@@ -1,5 +1,4 @@
-
-/**
+    /**
  * Checkers game base framework. 
  */
 public class Board {
@@ -229,15 +228,10 @@ public class Board {
       {
         boardState[endRow][endCol] = boardState[startRow][startCol];
         boardState[startRow][startCol] = empty;
-        if(endCol > 0)
-        {
-          if(boardState[endRow - 1][endCol - 1].equals(black))
+        if(endRow - startRow == 2 && endCol - startCol == -2)
+            boardState[endRow - 1][endCol + 1] = empty;
+        else if(endRow - startRow == 2 && endCol - startCol == 2)
             boardState[endRow - 1][endCol - 1] = empty;
-          else
-            boardState[endRow - 1][endCol + 1] = empty;
-        }
-        else if(boardState[endRow - 1][endCol + 1].equals(black))
-            boardState[endRow - 1][endCol + 1] = empty;
       }
     }
     else
@@ -251,15 +245,10 @@ public class Board {
       {
         boardState[endRow][endCol] = boardState[startRow][startCol];
         boardState[startRow][startCol] = empty;
-        if(endCol > 0)
-        {
-          if(boardState[endRow + 1][endCol - 1].equals(red))
+        if(startRow - endRow == 2 && endCol - startCol == -2)
+            boardState[endRow + 1][endCol + 1] = empty;
+        else if(startRow - endRow == 2 && endCol - startCol == 2)
             boardState[endRow + 1][endCol - 1] = empty;
-          else
-            boardState[endRow + 1][endCol + 1] = empty;
-        }
-        else if(boardState[endRow + 1][endCol + 1].equals(red))
-            boardState[endRow + 1][endCol + 1] = empty;
       }
     }
   }
