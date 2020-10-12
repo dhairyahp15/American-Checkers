@@ -60,20 +60,25 @@ public class Board {
   public void drawTile(int row, int col, String color)
   {
     // This should work only if the given String color is red or black.
-    if(color.equalsIgnoreCase("RED") || color.equalsIgnoreCase("BLACK"))
+    if(color.equalsIgnoreCase(red) || color.equalsIgnoreCase(black))
     {
       // Scaling center of the tile using the given row and column.
       double xC = (2 * col + 1)/(2.0 * BOARD_SIZE);
       double yC = (2 * row + 1)/(2.0 * BOARD_SIZE);
 
       // following conditional checks the given color and sets the pen color respectively.
-      if(color.equalsIgnoreCase("BLACK"))
+      if(color.equalsIgnoreCase(black))
         StdDraw.setPenColor(StdDraw.BLACK);
       else
         StdDraw.setPenColor(StdDraw.RED);
       // Drawing filled ellipse with the respective pen color and center.
       StdDraw.filledEllipse(xC, yC, TILE_RADIUS, TILE_RADIUS);
     }
+    else
+    {
+      StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
+      StdDraw.filledEllipse(xC, yC, TILE_RADIUS, TILE_RADIUS);
+    } // if the empty string passed or any other string than red or black then it will draw nothing, i.e. simply gray tile on gray backgorund.
   }
 
   // This method verifies if the tile is valid or not.
@@ -142,5 +147,33 @@ public class Board {
       }
     }
   } 
+
+  public String getTileColor(int row, int col)
+  {
+    return boardState[row][col];
+  }
+
+  public void drawSelectedTile(int row, int col)
+  {
+    double xC = (2 * col + 1)/(2.0 * BOARD_SIZE);
+    double yC = (2 * row + 1)/(2.0 * BOARD_SIZE);
+    StdDraw.setPenColor(StdDraw.GREEN);
+    StdDraw.ellipse(xC, yC, TILE_RADIUS, TILE_RADIUS);
+  }
+
+  public int countTiles(String color)
+  {
+    int count = 0;
+    for(int i = 0; i < BOARD_SIZE; i++)
+    {
+      for(int j = 0; j < BOARD_SIZE; j++)
+      {
+        if(boardState[i][j].equalsIgnoreCase(color))
+          count++;
+      }
+    }
+    return count;
+  }
+
 
 }//Chessboard
