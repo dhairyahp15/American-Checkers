@@ -16,11 +16,12 @@ public class TestClassA2{
     Board b = new Board();
     // testing out all the instance methods created.
     b.drawBoard();
-    b.drawTile(0, 0, Board.red);
-    b.drawTile(7, 7, Board.black);
+    //b.drawTile(0, 0, Board.red);
+    //b.drawTile(7, 7, Board.black);
     b.resetBoard();
     b.drawTiles();
-    b.setTile(3, 5, Board.black);
+    //b.clearBoard();
+    b.setTile(4, 6, Board.black);
     b.drawTiles();
   }
 /*

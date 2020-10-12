@@ -24,16 +24,10 @@ public class Board {
   // Phase 1
   public Board(){
     // Add your code here .... 
-    boardState = new String[8][8]; // Initialized the boardState array same size as BOARD_SIZE - 8 x 8.
+    boardState = new String[BOARD_SIZE][BOARD_SIZE]; // Initialized the boardState array same size as BOARD_SIZE - 8 x 8.
 
     // setting all the values of the array to empty.
-    for(int i = 0; i < BOARD_SIZE; i++)
-    {
-      for(int j = 0; j < BOARD_SIZE; j++)
-      {
-        boardState[i][j] = empty;
-      }
-    }
+    clearBoard();
   }
 
   // The following method draws the checkerboerd with white and gray checks wiht the provided size.
@@ -69,8 +63,8 @@ public class Board {
     if(color.equalsIgnoreCase("RED") || color.equalsIgnoreCase("BLACK"))
     {
       // Scaling center of the tile using the given row and column.
-      double xC = (2 * row + 1)/(2.0 * BOARD_SIZE);
-      double yC = (2 * col + 1)/(2.0 * BOARD_SIZE);
+      double xC = (2 * col + 1)/(2.0 * BOARD_SIZE);
+      double yC = (2 * row + 1)/(2.0 * BOARD_SIZE);
 
       // following conditional checks the given color and sets the pen color respectively.
       if(color.equalsIgnoreCase("BLACK"))
@@ -94,6 +88,7 @@ public class Board {
   // This method clears the tiles on the board and stores the starting positon of the board in the boardState.
   public void resetBoard()
   {
+    boardState = new String[BOARD_SIZE][BOARD_SIZE];
     for(int i = 0; i < BOARD_SIZE; i++)
     {
       for(int j = 0; j < BOARD_SIZE; j++)
@@ -101,10 +96,9 @@ public class Board {
         boardState[i][j] = empty;
       }
     } // Clears the board.
-
-    for(int i = 0; i < BOARD_SIZE; i++)
+    for(int i = 0; i < 3; i++)
     {
-      for(int j = 0; j < 3; j++)
+      for(int j = 0; j < BOARD_SIZE; j++)
       {
         if(isValidTile(i, j))
         {
@@ -113,9 +107,9 @@ public class Board {
       }
     } // Sets the red tiles to the starting positions.
 
-    for(int i = 0; i < BOARD_SIZE; i++)
+    for(int i = BOARD_SIZE - 1; i >= BOARD_SIZE - 3; i--)
     {
-      for(int j = BOARD_SIZE - 1; j >= BOARD_SIZE - 3; j--)
+      for(int j = 0; j < BOARD_SIZE; j++)
       {
         if(isValidTile(i, j))
         {
@@ -131,21 +125,20 @@ public class Board {
     {
       for(int j = 0; j < BOARD_SIZE; j++)
       {
-        if(isValidTile(i, j))
-        {
-          drawTile(i, j, boardState[i][j]);
-        }
+        drawTile(i, j, boardState[i][j]);
       }
     }
   }
 
   public void setTile(int row, int col, String value)
   {
-          boardState[row][col] = value;
+    //clearBoard();
+    boardState[row][col] = value;
   }
 
   public void clearBoard()
   {
+    boardState = new String[BOARD_SIZE][BOARD_SIZE];
     for(int i = 0; i < BOARD_SIZE; i++)
     {
       for(int j = 0; j < BOARD_SIZE; j++)
@@ -153,8 +146,6 @@ public class Board {
         boardState[i][j] = empty;
       }
     }
-  }
-
-  
+  } 
 
 }//Chessboard
