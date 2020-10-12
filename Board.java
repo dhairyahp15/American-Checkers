@@ -88,14 +88,7 @@ public class Board {
   // This method clears the tiles on the board and stores the starting positon of the board in the boardState.
   public void resetBoard()
   {
-    boardState = new String[BOARD_SIZE][BOARD_SIZE];
-    for(int i = 0; i < BOARD_SIZE; i++)
-    {
-      for(int j = 0; j < BOARD_SIZE; j++)
-      {
-        boardState[i][j] = empty;
-      }
-    } // Clears the board.
+    clearBoard(); // Clears the board.
     for(int i = 0; i < 3; i++)
     {
       for(int j = 0; j < BOARD_SIZE; j++)
@@ -119,23 +112,25 @@ public class Board {
     } // Sets the black tiles to the starting position.
   }
 
+  // The following method draws the current state of the board.
   public void drawTiles()
   {
     for(int i = 0; i < BOARD_SIZE; i++)
     {
       for(int j = 0; j < BOARD_SIZE; j++)
       {
-        drawTile(i, j, boardState[i][j]);
+        drawTile(i, j, boardState[i][j]);// Using drawTile, current state of board is printed on the screen.
       }
     }
   }
 
+  // This method is used to set Tile color to the given value and corresponding row and column.
   public void setTile(int row, int col, String value)
   {
-    //clearBoard();
     boardState[row][col] = value;
   }
 
+  // ClearBoard() method clears the state of board, i.e. set all the values of boardState to empty.
   public void clearBoard()
   {
     boardState = new String[BOARD_SIZE][BOARD_SIZE];
@@ -143,7 +138,7 @@ public class Board {
     {
       for(int j = 0; j < BOARD_SIZE; j++)
       {
-        boardState[i][j] = empty;
+        boardState[i][j] = empty; // setting all the values to the empty state.
       }
     }
   } 
