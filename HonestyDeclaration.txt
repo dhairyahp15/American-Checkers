@@ -27,15 +27,17 @@ Please PRINT all information:
 
 Course                : COMP 1020
 
-Section               :
+Section               :	1
      
-Last Name, First Name : 
-Student Number        :
-Email              :
+Last Name, First Name : Prajapati Dhairya
 
-Assignment            :
- Assignment
-Date                  :
+Student Number        : PRADD2001
+
+Email                 : pradd2001@learning.icmanitoba.ca
+
+Assignment            : 2 (Checkerboard game)
+
+Date                  : 12 October 2020
 
 (*) Penalties that may apply, as provided for under the University of 
 Manitoba's Student Discipline By-Law, range from a grade of zero for the 

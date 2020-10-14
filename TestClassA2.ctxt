@@ -8,4 +8,6 @@ comment3.params=
 comment3.target=void\ phase2()
 comment4.params=
 comment4.target=void\ phase3()
-numComments=5
+comment5.params=
+comment5.target=void\ phase4()
+numComments=6

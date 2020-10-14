@@ -73,11 +73,6 @@ public class Board {
       // Drawing filled ellipse with the respective pen color and center.
       StdDraw.filledEllipse(xC, yC, TILE_RADIUS, TILE_RADIUS);
     }
-    else if(color.equalsIgnoreCase(empty) && isValidTile(row, col))
-    {
-      StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
-      StdDraw.filledEllipse(xC, yC, TILE_RADIUS, TILE_RADIUS);
-    } // if the empty string passed or any other string than red or black then it will draw nothing, i.e. simply gray tile on gray backgorund.
   }
 
   // This method verifies if the tile is valid or not.
@@ -177,10 +172,12 @@ public class Board {
   public boolean isValidMove(int startRow, int startCol, int endRow, int endCol, String color)
   {
     boolean isValidMove = false;
-    if(boardState[endRow][endCol].equals(empty))
+    if(isValidTile(endRow, endCol))
     {
-      if(color.equals(red))
+      if(boardState[endRow][endCol].equals(empty))
       {
+        if(color.equals(red))
+        {
           if(endRow - startRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
             isValidMove = true;
           else if(endRow - startRow == 2 && (endCol - startCol == 2 || startCol - endCol == 2))
@@ -207,48 +204,52 @@ public class Board {
 
           }
           else
-             isValidMove = false;
+            isValidMove = false;
+        }
       }
+      else
+        isValidMove = false;
     }
-    else
-       isValidMove = false;
     return isValidMove;
   }
 
   public void applyMove(int startRow, int startCol, int endRow, int endCol)
   {
-    if(boardState[startRow][startCol].equals(red))
+    if(isValidTile(endRow, endCol))
     {
-      if(endRow - startRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+      if(boardState[startRow][startCol].equals(red))
       {
-        boardState[endRow][endCol] = boardState[startRow][startCol];
-        boardState[startRow][startCol] = empty;
+        if(endRow - startRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
+        {
+          boardState[endRow][endCol] = boardState[startRow][startCol];
+          boardState[startRow][startCol] = empty;
+        }
+        else
+        {
+          boardState[endRow][endCol] = boardState[startRow][startCol];
+          boardState[startRow][startCol] = empty;
+          if(endRow - startRow == 2 && endCol - startCol == -2)
+              boardState[endRow - 1][endCol + 1] = empty;
+          else if(endRow - startRow == 2 && endCol - startCol == 2)
+              boardState[endRow - 1][endCol - 1] = empty;
+        }
       }
       else
       {
-        boardState[endRow][endCol] = boardState[startRow][startCol];
-        boardState[startRow][startCol] = empty;
-        if(endRow - startRow == 2 && endCol - startCol == -2)
-            boardState[endRow - 1][endCol + 1] = empty;
-        else if(endRow - startRow == 2 && endCol - startCol == 2)
-            boardState[endRow - 1][endCol - 1] = empty;
-      }
-    }
-    else
-    {
         if(startRow - endRow == 1 && (endCol - startCol == 1 || startCol - endCol == 1))
-      {
-        boardState[endRow][endCol] = boardState[startRow][startCol];
-        boardState[startRow][startCol] = empty;
-      }
-      else
-      {
-        boardState[endRow][endCol] = boardState[startRow][startCol];
-        boardState[startRow][startCol] = empty;
-        if(startRow - endRow == 2 && endCol - startCol == -2)
-            boardState[endRow + 1][endCol + 1] = empty;
-        else if(startRow - endRow == 2 && endCol - startCol == 2)
-            boardState[endRow + 1][endCol - 1] = empty;
+        {
+          boardState[endRow][endCol] = boardState[startRow][startCol];
+          boardState[startRow][startCol] = empty;
+        }
+        else
+        {
+          boardState[endRow][endCol] = boardState[startRow][startCol];
+          boardState[startRow][startCol] = empty;
+          if(startRow - endRow == 2 && endCol - startCol == -2)
+              boardState[endRow + 1][endCol + 1] = empty;
+          else if(startRow - endRow == 2 && endCol - startCol == 2)
+              boardState[endRow + 1][endCol - 1] = empty;
+        }
       }
     }
   }
