@@ -37,7 +37,7 @@ Email                 : pradd2001@learning.icmanitoba.ca
 
 Assignment            : 2 (Checkerboard game)
 
-Date                  : 12 October 2020
+Date                  : 16 October 2020
 
 (*) Penalties that may apply, as provided for under the University of 
 Manitoba's Student Discipline By-Law, range from a grade of zero for the 

@@ -1,12 +1,10 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
+PROJECT TITLE: American Checkers Game (English Draughts)
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+PURPOSE OF PROJECT: Very basic version of checkers, without multiple captures.
+
+AUTHOR: DHAIRYA PRAJAPATI
+
+USER INSTRUCTIONS: The GameController.java contains all the logic and interface for the game. To play 
+the game you can simply run the GameController.java file.
+This game uses the StdDraw library from Java to display the graphics of the game.
+Note: This game does not support multiple captures.
